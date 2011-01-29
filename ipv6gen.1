@@ -1,0 +1,166 @@
+.TH ipv6gen 1
+.SH NAME
+ipv6gen \- IPv6 prefix generator.
+.SH SYNOPSIS
+.B ipv6gen
+[
+.B \-d
+] 
+[
+.B \-lmr
+] 
+[
+.B \-s <num>
+] 
+.B 
+<prefix> <prefix_length>
+.SH DESCRIPTION
+.PP
+\fBipv6gen\fP is tool which generates list of IPv6 prefixes of given 
+prefix length from certain prefix according to RFC 3531.
+.PP
+.SH OPTIONS
+.TP
+.B \-d
+debug mode. Displays allocated prefix as bit array.
+.TP
+.B \-l
+allocate bits from the left. e.g. for delta 4, the bit array looks like this:
+
+.nf
+0000
+1000
+0100
+1100
+0010
+1010
+0110
+1110
+0001
+1001
+0101
+1101
+0011
+1011
+0111
+1111
+.fi
+.Ed
+.TP
+.B \-r
+allocate bits from the right. This is the same as allocation from the left
+but reversed. e.g. again for delta of value 4:
+
+.nf
+0000
+0001
+0010
+0011
+0100
+0101
+0110
+0111
+1000
+1001
+1010
+1011
+1100
+1101
+1110
+1111
+.fi
+.TP
+.B \-m
+allocate bits from the middle. This method tries to allocate bits close
+to the axis of delta first and then proceeds to sides.
+For delta of value 4 it is:
+
+.nf
+0000
+0100
+0010
+0110
+1000
+1100
+1010
+1110
+0001
+0011
+0101
+0111
+1001
+1011
+1101
+1111
+.fi
+
+For delta of value 5, it is:
+
+.nf
+00000
+00100
+01000
+01100
+00010
+00110
+01010
+01110
+\&...
+
+00001
+00011
+00101
+00111
+01001
+01011
+01101
+01111
+10001
+10011
+10101
+10111
+11001
+11011
+11101
+11111
+.fi
+.TP
+.B \-s <num>
+set step between generated prefixes. It will leave out step-1 prefixes
+between each two generated prefixes. default step value is 1.
+.SH EXAMPLES
+If we need to to split /48 prefix into two prefixes:
+
+.nf
+worm[~/IPv6/ipv6gen]> ./ipv6gen.pl 2001:1508:1003::/48 49
+2001:1508:1003:0000::/49
+2001:1508:1003:8000::/49
+.fi
+
+To allocate bits from the middle from /32 prefix with 4-bits wide delta:
+
+.nf
+worm[~/IPv6/ipv6gen]> ./ipv6gen.pl -m 2001:1508::/32 36
+2001:1508:0000::/36
+2001:1508:4000::/36
+2001:1508:2000::/36
+2001:1508:6000::/36
+2001:1508:8000::/36
+2001:1508:C000::/36
+2001:1508:A000::/36
+2001:1508:E000::/36
+2001:1508:1000::/36
+2001:1508:3000::/36
+2001:1508:5000::/36
+2001:1508:7000::/36
+2001:1508:9000::/36
+2001:1508:B000::/36
+2001:1508:D000::/36
+2001:1508:F000::/36
+.fi
+.SH AUTHOR
+Vladimir Kotal <vlada@devnull.cz>
+.SH WEBPAGE
+http://techie.devnull.cz/ipv6/ipv6gen
+.SH BUGS/TODO
+ipv6gen should be converted to Perl library/module.

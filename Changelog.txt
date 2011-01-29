@@ -1,0 +1,15 @@
+
+0.8 - added checking of semantical correctness of input prefix
+      (if there are non-zero bits after prefix length boundary,
+      prefix is considered bad and ipv6gen exits with error.)
+0.7 - added stepping between generated prefixes as input parameter
+0.6 - fixed RFC 3513 non-compliancy bug (ipv6gen appended :: after
+      prefixes longer than 112 bits)
+0.5 - fixed zero padding bug - ipv6gen incorrectly generated prefixes
+      not aligned to byte boundary. e.g. /64 prefixes were incorrectly
+      generated from /49 prefixes)
+0.4 - fixed bug when generating bits for middle allocation and 
+      delta with even number of bits 
+0.3 - check for format of IPv6 prefixes
+0.2 - implemented allocation from the middle
+0.1 - only allocation from the left/right is implemented
