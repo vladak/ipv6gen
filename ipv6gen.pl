@@ -22,7 +22,7 @@ my $debug = 0;		# 1 - print debug messages
 my $method = "r";	# strategy for generating prefixes, default : right
 my $method_set = 0;	# indicate if strategy was set
 my $step = 1;		# default step between generated prefixes
-my $version = "0.8";
+my $version = "0.9";
 
 #
 # print help and exit
@@ -359,10 +359,24 @@ sub generate_m () {
   
   if (($delta % 2) == 0) {
     $left = 1;
+    # Even number of bits, pick the bit following the center
+    # RFC3531 Section 3.3
+    # muggle19355@gmail.com
+    $central_bit++; 
   }
   
   for ($rnd = 0; $rnd < $limit; $rnd++) {
     $rnd_limit=2 ** $rnd; # number of passes in each round
+
+    # special case for even number of bits at the very first round
+    if ($rnd_limit == 1)
+    {
+        if ($left == 1 && ($delta % 2) == 0)
+        {
+            $left=0;
+        }
+    }
+
     &debug("----- round \# $rnd\n");
     &debug("left: $left\n");
     &debug("central_bit: $central_bit\n");
@@ -394,7 +408,6 @@ sub generate_m () {
     }
   }
 }
-
 
 #
 # generate list of prefixes by allocating bits from the left/right

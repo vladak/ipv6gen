@@ -1,4 +1,8 @@
 
+0.9 - fixed bug centermost algorithm :
+      at the very first round the bit following the center for the even 
+      number of bits was not picked
+      - from Muggle L <muggle19355--at--gmail.com>
 0.8 - added checking of semantical correctness of input prefix
       (if there are non-zero bits after prefix length boundary,
       prefix is considered bad and ipv6gen exits with error.)
