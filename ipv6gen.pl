@@ -393,7 +393,12 @@ sub generate_m () {
         $str = reverse $str; 
 	$str = $tmp . $str;
       } else {
-        $str = $str . "1";
+	# This will take care of the delta == 1 case
+	if ($i == 0) {
+	  $str = "1";
+	} else {
+	  $str = $str . "1";
+	}
         $str = &zero_pad($str, $central_bit, 1);
       }
       $str = &zero_pad($str, $delta, 0);

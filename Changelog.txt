@@ -1,4 +1,6 @@
 
+1.0 - fixed bug in the algorithm allocating bits from the middle when
+      the delta was only 1 bit
 0.9 - fixed bug centermost algorithm :
       at the very first round the bit following the center for the even 
       number of bits was not picked
