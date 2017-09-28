@@ -22,7 +22,7 @@ my $debug = 0;		# 1 - print debug messages
 my $method = "r";	# strategy for generating prefixes, default : right
 my $method_set = 0;	# indicate if strategy was set
 my $step = 1;		# default step between generated prefixes
-my $version = "0.9";
+my $version = "1.0";
 
 #
 # print help and exit
