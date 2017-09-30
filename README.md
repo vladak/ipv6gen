@@ -10,6 +10,8 @@ ipv6gen is structured into functions, which can be used in proprietary scripts.
 
 ipv6gen is written in Perl.
 
+ipv6gen was used in the *IPv6 Address Planning* book by Tom Coffeen published by O'Reilly in 2014.
+
 ipv6gen and other related scripts are GPL licensed. 
 If you take some code out of ipv6gen and use it in your project, it would be nice if you mention that it comes from ipv6gen.
 
