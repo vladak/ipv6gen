@@ -320,6 +320,10 @@ sub print_binpfx () {
   if ($glen <= 112) {
     $addr = $addr . "::";
   }
+  
+  # To comply with RFC 5952 (https://tools.ietf.org/html/rfc5952) this should output lower case characters
+  $addr = lc $addr;
+  
   &print_pfx("$addr/$glen");
 }
 
