@@ -528,11 +528,16 @@ my $genlen = $ARGV[1];
 if ($genlen !~ /^[0-9]+$/) {
   print "length of prefix to be generated is not number: $genlen\n";
   exit(1);
-} 
+}
 
 if ($genlen < $pfx_len) {
- print "cannot generate \/$genlen prefixes from \/$pfx_len prefix\n";
- exit(1);
+  print "cannot generate \/$genlen prefixes from \/$pfx_len prefix\n";
+  exit(1);
+}
+
+if ($genlen > 128) {
+  print "invalid prefix length: \/$genlen\n";
+  exit(1);
 }
 
 &generate($addr, $pfx_len, $genlen, $method);
