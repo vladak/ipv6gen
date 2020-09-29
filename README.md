@@ -2,7 +2,7 @@
 IPv6 prefix generator
 
 ipv6gen is tool which generates list of IPv6 prefixes of given length from certain prefix 
-according to http://www.ietf.org/rfc/rfc3531.txt'>RFC 3531. (A Flexible Method for Managing the Assignment of 
+according to [RFC 3531](http://www.ietf.org/rfc/rfc3531.txt). (A Flexible Method for Managing the Assignment of 
 Bits of an IPv6 Address Block)
 
 This is intended as a helper script for either constructing IPv6 addressing scheme or allocating prefixes automatically. 
