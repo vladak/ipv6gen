@@ -207,8 +207,4 @@ $ ./check-overlap.pl 2001:1508::/32 2001:1508:FFB0:C0::/52
 
 ## Known bugs/TODO
 
-- add support of compressed IPv6 address format according to RFC3513, section 2.2.
-- make Perl code more clean
-- make a Perl library for work with IPv6 prefixes (?)
-- better man page
-- make ipv6gen available as cgi script
+see https://github.com/vladak/ipv6gen/issues
