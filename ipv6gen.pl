@@ -22,6 +22,7 @@ my $debug = 0;		# 1 - print debug messages
 my $method = "r";	# strategy for generating prefixes, default : right
 my $method_set = 0;	# indicate if strategy was set
 my $step = 1;		# default step between generated prefixes
+my $userlimit = 0;	# default user defined generation limit, 0 = no limit
 my $version = "1.0";
 
 #
@@ -39,6 +40,7 @@ sub help ()
   print "\nswitches:\n";
   print "-d\t\tdisplay debug messages\n";
   print "-s <num>\t\tstep between prefixes\n";
+  print "-n <num>\t\tlimit (only in left/rigth modes)\n";
   print "\n";
 
   exit(1);
@@ -442,6 +444,10 @@ sub generate_rl () {
   my $limit = 2 ** $delta;
   die "step bigger than limit ($step > $limit)" if ($step > $limit);
 
+  if ($userlimit > 0 && $userlimit < $limit) {
+    $limit = $userlimit;
+  }
+
   &debug("will generate " . $limit/$step . " prefixes\n");
   for ($i = 0; $i < $limit; $i+=$step) {
     $str = &dec2bin($i);
@@ -503,10 +509,11 @@ sub set_method () {
 # --------------------------------------------------------------------------
 
 my $opts = {};
-&getopts('s:dhmlr', $opts);
+&getopts('s:n:dhmlr', $opts);
 &help if exists $opts->{"h"};
 $debug = 1 if exists $opts->{"d"};
 $step = $opts->{"s"} if exists $opts->{"s"};
+$userlimit = $opts->{"n"} if exists $opts->{"n"};
 
 &help if (scalar(@ARGV) != 2);
 
